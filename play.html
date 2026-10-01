@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Root Cause</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="brand"><span class="logo" id="brandLogo">🥕</span><div><b>Root Cause</b><small id="brandSub">a carrot empire · v3.0</small></div></div>
+      <div class="stat money-stat"><span id="money">$0</span><small id="income">$0.00/s</small></div>
+      <div class="stat silo-stat">
+        <div class="silo-label">Silo <span id="silo">0 / 100</span></div>
+        <div class="bar"><div id="siloBar"></div></div>
+      </div>
+      <div class="stat" id="weather"></div>
+      <div class="stat" id="autonomy"></div>
+      <div id="buffs"></div>
+      <div class="spacer"></div>
+      <div class="stat" id="heirloom" title="Heirloom seeds: permanent income bonus"></div>
+      <button class="icon-btn" data-act="settings" title="Settings">⚙️</button>
+    </header>
+
+    <main>
+      <aside id="left" class="panel"></aside>
+      <section id="fieldWrap">
+        <canvas id="field"></canvas>
+        <div id="fieldHint">Click an empty plot to plant · click ripe crops to harvest</div>
+        <div id="farmNav"></div>
+      </section>
+      <aside id="right" class="panel">
+        <nav id="tabs"></nav>
+        <div id="tabBody"></div>
+      </aside>
+    </main>
+
+    <footer id="ticker"><span class="ticker-tag">CARROT NEWS NETWORK</span><div id="tickerText"></div></footer>
+  </div>
+
+  <div id="toasts"></div>
+  <div id="modalBack" hidden><div id="modal"></div></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

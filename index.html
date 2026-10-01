@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Root Cause: a carrot empire</title>
+  <meta name="description" content="AI took your job. Your only option: carrots. A free idle farming game you can play in your browser for months.">
+  <meta property="og:title" content="Root Cause: a carrot empire">
+  <meta property="og:description" content="AI took your job. Your only option: carrots. Then you buy the AI company. Then it takes your carrots.">
+  <meta property="og:image" content="screenshots/carrot-farm.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+  <style>
+    :root {
+      --bg: #2b1d12; --wood: #4a3222; --paper: #fbf3e0; --paper-2: #f3e6c8; --ink: #3b2a1c; --ink-soft: #7a6450;
+      --carrot: #f28c28; --carrot-dark: #d06d10; --leaf: #5aa845; --beet: #a3244f; --gold: #ffc53d;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--paper); font-family: "Nunito", system-ui, sans-serif; line-height: 1.55; }
+    a { color: var(--gold); }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header.hero { background: radial-gradient(ellipse at top, #5a3d29, var(--bg) 70%); padding: 56px 0 36px; text-align: center; }
+    .logo { font-size: 64px; line-height: 1; filter: drop-shadow(0 4px 0 rgba(0,0,0,.4)); }
+    h1 { font-size: clamp(40px, 8vw, 72px); margin: 8px 0 0; letter-spacing: 1px; line-height: 1.05; }
+    .tagline { font-size: clamp(18px, 3vw, 24px); color: #e9d6b4; margin: 10px 0 0; font-weight: 700; }
+    .pitch { max-width: 680px; margin: 18px auto 0; color: #d8c3a5; font-size: 17px; }
+    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 900; font-size: 20px; padding: 14px 28px; border-radius: 14px; color: #fff; background: var(--carrot); box-shadow: 0 5px 0 var(--carrot-dark); transition: transform .08s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--carrot-dark); }
+    .btn.ghost { background: transparent; border: 3px solid #7a5a3e; box-shadow: none; color: var(--paper); font-size: 16px; padding: 11px 20px; }
+    .small { font-size: 13px; color: #b9a283; margin-top: 12px; }
+
+    .shot-main { margin: 8px auto 0; border-radius: 16px; border: 4px solid var(--wood); box-shadow: 0 10px 0 #1d130b; overflow: hidden; display: block; }
+    .shot-main img, figure img { display: block; width: 100%; height: auto; }
+
+    section { padding: 48px 0; }
+    h2 { font-size: 30px; margin: 0 0 18px; text-align: center; }
+    .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    figure { margin: 0; background: var(--paper); color: var(--ink); border-radius: 14px; overflow: hidden; border: 3px solid var(--wood); box-shadow: 0 6px 0 #1d130b; }
+    figcaption { padding: 10px 14px; font-weight: 700; font-size: 14px; }
+    figcaption b { color: var(--carrot-dark); }
+    .phone { display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: center; margin-top: 28px; }
+    .phone figure { max-width: 280px; }
+
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { background: var(--paper); color: var(--ink); border-radius: 14px; padding: 16px 18px; border: 3px solid var(--wood); box-shadow: 0 5px 0 #1d130b; }
+    .feature .ico { font-size: 30px; }
+    .feature h3 { margin: 4px 0 6px; font-size: 18px; }
+    .feature p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+    .faq { max-width: 760px; margin: 0 auto; }
+    .faq details { background: rgba(0,0,0,.25); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; }
+    .faq summary { font-weight: 800; cursor: pointer; font-size: 16px; }
+    .faq p { color: #e3cfae; margin: 8px 0 2px; }
+
+    footer { border-top: 2px solid #3d2a1a; padding: 26px 0 40px; text-align: center; color: #b9a283; font-size: 14px; }
+    .ticker { background: #1a110a; border-top: 2px solid #3d2a1a; border-bottom: 2px solid #3d2a1a; overflow: hidden; white-space: nowrap; font-size: 14px; color: #f5e3c3; }
+    .ticker span { display: inline-block; padding: 8px 0 8px 100%; animation: tick 40s linear infinite; }
+    .ticker b { color: #fff; background: #e74c3c; padding: 2px 8px; margin-right: 10px; font-size: 11px; letter-spacing: 1px; }
+    @keyframes tick { to { transform: translateX(-100%); } }
+    @media (prefers-reduced-motion: reduce) { .ticker span { animation: none; padding-left: 16px; } }
+
+    @media (max-width: 820px) {
+      .shots, .features { grid-template-columns: 1fr; }
+      .phone { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      header.hero { padding-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="logo">🥕</div>
+      <h1>Root Cause</h1>
+      <p class="tagline">AI took your job. Your only option: carrots.</p>
+      <p class="pitch">An idle farming game about vegetables, revenge and Dave, who needs the money. Start with a 3×3 plot, $15 of severance and a packet of seeds. Build a carrot empire, buy the AI company that fired you, and then make some very questionable decisions with it.</p>
+      <div class="cta">
+        <a class="btn" href="play.html">▶ Play in your browser</a>
+        <a class="btn ghost" href="https://github.com/MatthewSalzman/CarrotGame">View the source</a>
+      </div>
+      <div class="small">Free. No account. No ads. Works on phones. Your farm saves in your browser.</div>
+    </div>
+  </header>
+
+  <div class="ticker"><span><b>CARROT NEWS NETWORK</b>Study: 9 out of 10 carrots cannot be automated. &nbsp;·&nbsp; Local man discovers "touching grass" is also a career. &nbsp;·&nbsp; OptimaAI launches "FarmGPT"; it has never seen a farm. &nbsp;·&nbsp; Laid-off QA engineer rehired to repair the robots that replaced him. "I need the money," he confirms. &nbsp;·&nbsp; Aunt Carol spotted at the county fair, judging pickles "harshly but fairly."</span></div>
+
+  <section>
+    <div class="wrap">
+      <a class="shot-main" href="play.html"><img src="screenshots/carrot-farm.png" alt="A carrot farm with farm hands, a tractor, rabbits and a golden carrot" width="2160" height="1290"></a>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>What you'll be doing for the next six months</h2>
+      <div class="features">
+        <div class="feature"><div class="ico">🌱</div><h3>Grow carrots</h3><p>Plant, harvest, sell. Twelve carrot varieties from Classic Orange to Grandpa's Heirloom, plus new seed packs you unlock as you franchise. Every carrot rolls a quality from Wonky to Legendary.</p></div>
+        <div class="feature"><div class="ico">🧑‍🌾</div><h3>Hire your laid-off friends</h3><p>Farm hands, tractors, sales reps, a farm manager and a pack of very good dogs to chase the rabbits. The farm keeps working while you're away.</p></div>
+        <div class="feature"><div class="ico">🏬</div><h3>Build an empire</h3><p>Roadside stands, juice bars, carrot cola, the Global Carrot Exchange. Eventually you can afford to buy OptimaAI, the company that replaced you with a chatbot.</p></div>
+        <div class="feature"><div class="ico">🤖</div><h3>Automate everything</h3><p>FarmBots zap your farm hands and take their jobs. Laser drones replace the dogs. Only Dave can fix the robots, and he is <i>not</i> happy about it.</p></div>
+        <div class="feature"><div class="ico">🧠</div><h3>Deploy CarrotMind</h3><p>An Artificial Garden Intelligence that runs every farm and every decision, forever. The robots are very excited. They keep asking when.</p></div>
+        <div class="feature"><div class="ico">🟣</div><h3>Buy Aunt Carol's beet farm</h3><p>A whole second farm with its own crops, upgrades and businesses. It shares your bank account, but everything there costs a fortune, so your carrots have to fund it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <figure><img src="screenshots/beet-farm.png" alt="The beet farm, with round beets, a tractor and a golden beet" width="2160" height="1290" loading="lazy"><figcaption><b>Aunt Carol's beet farm.</b> Switch farms with the arrows. Both keep growing.</figcaption></figure>
+        <figure><img src="screenshots/uprising.png" alt="Robots converting the farm into server racks" width="2160" height="1290" loading="lazy"><figcaption><b>CarrotMind online.</b> The soil is theirs now. You were warned. Repeatedly. By email.</figcaption></figure>
+      </div>
+      <div class="phone">
+        <figure><img src="screenshots/mobile.png" alt="The game on a phone" width="780" height="1328" loading="lazy"><figcaption><b>On your phone.</b> Same farm, smaller dirt.</figcaption></figure>
+        <div>
+          <h2 style="text-align:left">Plays anywhere</h2>
+          <p style="color:#e3cfae;font-size:17px">Root Cause runs in any modern browser, on desktop or phone. There's nothing to install and no account to make. Progress is saved in your browser, and you can export it from Settings to move it to another device.</p>
+          <a class="btn" href="play.html">▶ Start farming</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap faq">
+      <h2>Questions people have asked, or might</h2>
+      <details><summary>How long does it take to "finish"?</summary><p>It doesn't really end. It's paced like Cookie Clicker: your first franchise takes a few days, OptimaAI takes a couple of weeks, the beet farm about a month, and then it keeps going for as long as you do.</p></details>
+      <details><summary>Do I have to keep the tab open?</summary><p>No. Your farm hands keep working while you're away (up to 24 hours once you hire a good Farm Manager). Come back, collect, buy something, leave. That's the whole lifestyle.</p></details>
+      <details><summary>Is this a commentary on AI replacing jobs?</summary><p>It's a game about carrots. The carrots have no comment.</p></details>
+      <details><summary>Who is Dave?</summary><p>Dave was in QA. Dave got replaced. Dave works for you now, fixing the robots that replaced him. Dave needs the money.</p></details>
+      <details><summary>Can I use the code?</summary><p>Yes, for anything that isn't commercial: play it, mod it, learn from it, share it with friends. You can't sell it or use it to make money. See the <a href="LICENSE.md">license</a> (PolyForm Noncommercial 1.0.0).</p></details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Root Cause, a carrot empire · © 2026 Matthew Salzman · <a href="LICENSE.md">PolyForm Noncommercial License</a> · <a href="https://github.com/MatthewSalzman/CarrotGame">GitHub</a><br>
+      No carrots were automated in the making of this game. Several were deprecated.
+    </div>
+  </footer>
+</body>
+</html>

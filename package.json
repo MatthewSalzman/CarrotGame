@@ -1,0 +1,15 @@
+{
+  "name": "root-cause",
+  "productName": "Root Cause",
+  "version": "0.1.0",
+  "description": "AI took your job. Build a carrot empire.",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "sim": "node tools/simulate.js"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0"
+  }
+}
